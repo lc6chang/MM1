@@ -17,8 +17,4 @@ public class Customer {
 		id=_id;
 	}
 	
-	//增加间隔时间，用于当队列达到最大长度时，延后后续顾客的到达时间
-	public void add_interval_time(double t) {
-		interval_time+=t;
-	}
 }

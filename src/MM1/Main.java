@@ -39,13 +39,13 @@ public class Main {
         System.out.println("顾客到达率(人/秒)："
         				   +String.format("%.5f",num_cus/que_wait.last_arrival_time));
         System.out.println("服务器服务率(人/秒)："
-        				   +String.format("%.5f",num_cus/ser.serve_time));
+        				   +String.format("%.5f",ser.serve_num/ser.serve_time));
         System.out.println("队列平均顾客数(人)："
         				   +String.format("%.5f",que_wait.total_of_delays/ser.current_time));
-        System.out.println("平均等待时间(分母为顾客总数,秒)："
-        				   +String.format("%.5f",que_wait.total_of_delays/num_cus));
+        System.out.println("平均等待时间(秒)："
+        				   +String.format("%.5f",que_wait.total_of_delays/ser.serve_num));
         System.out.println("服务器利用率："
         				   +String.format("%.5f",ser.serve_time/ser.current_time));
-        
+ 
 	}
 }

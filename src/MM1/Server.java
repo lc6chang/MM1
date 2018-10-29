@@ -7,10 +7,12 @@ import java.util.ArrayList;
 public class Server {
 	public double current_time;//当前时间
 	public double serve_time;//服务器服务总时间
+	public int serve_num;//服务顾客总数
 	
 	public Server() {//初始化属性
 		current_time=0.0;
 		serve_time=0.0;
+		serve_num=0;
 	}
 	
 	//服务器开始运行
@@ -72,15 +74,17 @@ public class Server {
 					e.printStackTrace();
 				}
 			}
-			//将初始生成的顾客中，因队列长度限制无法加入到队列中的顾客的到达时间间隔适当延长
+			//将初始生成的顾客中，因队列长度限制无法加入到队列中的顾客移除，代表着顾客到达时队列已满，顾客离开
 			while(que_init.size()!=0) {
 				if(que_init.get(0).interval_time+que_wait.last_arrival_time>=end_time) {
 					break;
 				}
-				que_init.get(0).add_interval_time(end_time-que_init.get(0).interval_time-que_wait.last_arrival_time);
+				que_wait.last_arrival_time=que_wait.last_arrival_time+que_init.get(0).interval_time;
+				que_init.remove(0);
 			}
 			//结束服务，仿真时间推进至服务结束时间
 			current_time=end_time;
+			serve_num++;
 			//记录日志
 			try {
 				log.write(String.format("%.5f",current_time)+" 第"+cus2.id+"号顾客结束服务离开了\r\n");
